@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">UDFSample</string>
+    <string name="nutritions_category">Nutritions:</string>
+    <string name="error_message">Sorry, something went wrong:</string>
+    <!--Nutritions-->
+    <string name="nutrition_carbohydrates">Carbohydrates %f</string>
+    <string name="nutrition_protein">Protein %f</string>
+    <string name="nutrition_fat">Fat %f</string>
+    <string name="nutrition_calories">Calories %f</string>
+    <string name="nutrition_sugar">Sugar %f</string>
+</resources>
