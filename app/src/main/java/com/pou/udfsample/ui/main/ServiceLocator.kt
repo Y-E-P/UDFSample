@@ -23,7 +23,7 @@ object ServiceLocator {
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .client(httpClient)
-            .baseUrl("https://www.fruityvice.com/api/")
+            .baseUrl("https://fruityvice.com/api/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }

@@ -6,7 +6,7 @@ import com.pou.udfsample.ui.main.ServiceLocator
 class FruitApp : Application() {
 
     override fun onCreate() {
-        super.onCreate()
         ServiceLocator.context = this
+        super.onCreate()
     }
 }
