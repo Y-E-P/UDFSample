@@ -23,15 +23,9 @@ class MainViewModel(
         return liveData {
             emit(currentState.copy(isLoading = true))
             val data = repository.allFruitsList()
-            currentState = currentState.copy(isLoading = false, data = data.map {
-                FruitsAdapterData.Data(
-                    it.id,
-                    it.genus,
-                    it.name,
-                    it.family,
-                    it.order,
-                    it.nutritions,
-                )
+            val genus = data.map { it.genus }.toList()
+            currentState = currentState.copy(genusList = genus, isLoading = false, data = data.map {
+                FruitsAdapterData.Data(it)
             })
             emit(currentState)
         }

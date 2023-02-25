@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pou.udfsample.R
 import com.pou.udfsample.databinding.FruitItemViewBinding
 import com.pou.udfsample.databinding.ViewErrorBinding
+import com.pou.udfsample.databinding.ViewGenusSelectorBinding
 import com.pou.udfsample.databinding.ViewLoadingBinding
 import com.pou.udfsample.ui.main.common.getString
 import com.pou.udfsample.ui.main.common.viewBinding
@@ -47,7 +48,6 @@ class FruitsAdapter : ListAdapter<FruitsAdapterData, RecyclerView.ViewHolder>(di
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
         return when (viewType) {
             R.layout.fruit_item_view -> FruitViewHolder(
                 parent.viewBinding(
@@ -117,4 +117,13 @@ class FruitsAdapter : ListAdapter<FruitsAdapterData, RecyclerView.ViewHolder>(di
 
     inner class LoadingViewHolder(binding: ViewLoadingBinding) :
         RecyclerView.ViewHolder(binding.root)
+
+    inner class GenusSelectorViewHolder(private val binding: ViewGenusSelectorBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun onBind(list: List<GenusPickerData>) {
+            //binding.errorText.text = errorMessage
+        }
+
+    }
 }

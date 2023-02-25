@@ -21,16 +21,23 @@ import com.squareup.moshi.Json
 
  * */
 
-
+interface Fruit {
+    val id: Int
+    val genus: String
+    val name: String
+    val family: String
+    val order: String
+    val nutritions: NutritionModel
+}
 
 data class FruitModel(
-    @field:Json(name = "id") val id: Int,
-    @field:Json(name = "genus") val genus: String,
-    @field:Json(name = "name") val name: String,
-    @field:Json(name = "family") val family: String,
-    @field:Json(name = "order") val order: String,
-    @field:Json(name = "nutritions") val nutritions: NutritionModel
-)
+    @field:Json(name = "id") override val id: Int,
+    @field:Json(name = "genus") override val genus: String,
+    @field:Json(name = "name") override val name: String,
+    @field:Json(name = "family") override val family: String,
+    @field:Json(name = "order") override val order: String,
+    @field:Json(name = "nutritions") override val nutritions: NutritionModel
+) : Fruit
 
 data class NutritionModel(
     @field:Json(name = "carbohydrates") val carbohydrates: Float,
