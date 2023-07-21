@@ -11,8 +11,11 @@ import com.pou.udfsample.databinding.ViewGenusSelectorBinding
 import com.pou.udfsample.databinding.ViewLoadingBinding
 import com.pou.udfsample.ui.main.common.getString
 import com.pou.udfsample.ui.main.common.viewBinding
+import com.pou.udfsample.utils.ListPaddingDecoration
 
 class FruitsAdapter : ListAdapter<FruitsAdapterData, RecyclerView.ViewHolder>(diffCallback) {
+
+    var clickCallback: () -> Unit = {}
 
     companion object {
         private val diffCallback: ItemCallback<FruitsAdapterData> =
@@ -26,17 +29,15 @@ class FruitsAdapter : ListAdapter<FruitsAdapterData, RecyclerView.ViewHolder>(di
                             && newItem is FruitsAdapterData.Data
                             && oldItem.id == newItem.id
 
+                    val isSameSelected =
+                        oldItem is FruitsAdapterData.GenusItems && newItem is FruitsAdapterData.GenusItems
+
                     val isError =
                         oldItem is FruitsAdapterData.Error && newItem is FruitsAdapterData.Error
                     val isLoading =
                         oldItem is FruitsAdapterData.Loading && newItem is FruitsAdapterData.Loading
 
-                    return isSameData || isLoading || isError
-                    /*return when (oldItem) {
-                        is FruitsAdapterData.Data -> true
-                        is FruitsAdapterData.Loading -> true
-                        is FruitsAdapterData.Error -> true
-                    }*/
+                    return isSameData || isLoading || isError || isSameSelected
                 }
 
                 override fun areContentsTheSame(
@@ -55,18 +56,28 @@ class FruitsAdapter : ListAdapter<FruitsAdapterData, RecyclerView.ViewHolder>(di
                     attachToParent = false
                 )
             )
+
             R.layout.view_error -> ErrorViewHolder(
                 parent.viewBinding(
                     ViewErrorBinding::inflate,
                     attachToParent = false
                 )
             )
+
             R.layout.view_loading -> LoadingViewHolder(
                 parent.viewBinding(
                     ViewLoadingBinding::inflate,
                     attachToParent = false
                 )
             )
+
+            R.layout.view_genus_selector -> GenusSelectorViewHolder(
+                parent.viewBinding(
+                    ViewGenusSelectorBinding::inflate,
+                    attachToParent = false
+                )
+            )
+
             else -> throw IllegalArgumentException("Not supported view type")
         }
     }
@@ -75,6 +86,7 @@ class FruitsAdapter : ListAdapter<FruitsAdapterData, RecyclerView.ViewHolder>(di
         when (holder) {
             is FruitViewHolder -> holder.onBind(getItem(position) as FruitsAdapterData.Data)
             is ErrorViewHolder -> holder.onBind("Error")
+            is GenusSelectorViewHolder -> holder.onBind(getItem(position) as FruitsAdapterData.GenusItems)
             is LoadingViewHolder -> {}
         }
     }
@@ -84,6 +96,7 @@ class FruitsAdapter : ListAdapter<FruitsAdapterData, RecyclerView.ViewHolder>(di
             is FruitsAdapterData.Data -> R.layout.fruit_item_view
             is FruitsAdapterData.Error -> R.layout.view_error
             is FruitsAdapterData.Loading -> R.layout.view_loading
+            is FruitsAdapterData.GenusItems -> R.layout.view_genus_selector
         }
     }
 
@@ -121,8 +134,16 @@ class FruitsAdapter : ListAdapter<FruitsAdapterData, RecyclerView.ViewHolder>(di
     inner class GenusSelectorViewHolder(private val binding: ViewGenusSelectorBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(list: List<GenusPickerData>) {
-            //binding.errorText.text = errorMessage
+        private val adapter by lazy { GenusAdapter() }
+
+        fun onBind(item: FruitsAdapterData.GenusItems) {
+            if (binding.root.adapter == null) {
+                binding.root.adapter = adapter
+            }
+            adapter.submitList(item.items)
+            binding.root.addItemDecoration(
+                ListPaddingDecoration(binding.root.context, left = 8, right = 8)
+            )
         }
 
     }

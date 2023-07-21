@@ -8,4 +8,5 @@
     <string name="nutrition_fat">Fat %f</string>
     <string name="nutrition_calories">Calories %f</string>
     <string name="nutrition_sugar">Sugar %f</string>
+    <string name="all">All</string>
 </resources>

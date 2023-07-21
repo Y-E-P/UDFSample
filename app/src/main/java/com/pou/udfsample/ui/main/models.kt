@@ -9,7 +9,8 @@ sealed class FruitsAdapterData {
     data class Data(
         val fruitModel: FruitModel,
     ) : FruitsAdapterData(), Fruit by fruitModel
-     //data class GenusItems(val items: List<GenusPickerData>) : FruitsAdapterData()
+
+    data class GenusItems(val items: List<GenusPickerData>) : FruitsAdapterData()
 }
 
 sealed class GenusPickerData(open val isSelected: Boolean) {
