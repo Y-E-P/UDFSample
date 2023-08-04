@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.pou.udfsample.domain.FruitModel
 import com.pou.udfsample.domain.repo.FruitsRepository
+import kotlinx.coroutines.delay
 
 class MainViewModel(
     private val repository: FruitsRepository
