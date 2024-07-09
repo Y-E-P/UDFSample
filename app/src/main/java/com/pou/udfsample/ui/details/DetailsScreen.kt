@@ -5,11 +5,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pou.udfsample.ui.main.MainViewModel
 
 @Composable
-fun MainScreen(viewModel: MainViewModel = viewModel()) {
+fun DetailsScreen(viewModel: MainViewModel = viewModel()) {
 
 }
 
 @Composable
-fun MainScreenPreview() {
-    MainScreen()
+fun DetailsScreenPreview() {
+    DetailsScreen()
 }

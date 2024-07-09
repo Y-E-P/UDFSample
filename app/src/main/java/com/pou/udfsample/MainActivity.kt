@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.pou.udfsample.ui.details.DetailsScreen
 import com.pou.udfsample.ui.main.FruitsListScreen
 import com.pou.udfsample.ui.main.MainViewModel
 import com.pou.udfsample.ui.main.MainViewModelFactory
@@ -27,9 +28,9 @@ class MainActivity : AppCompatActivity() {
                     )
                     FruitsListScreen(navigation = navController, viewModel)
                 }
-                /*composable("SecondScreen") {
-                    SecondScreen(navigation = navController)
-                }*/
+                composable("SecondScreen") {
+                    DetailsScreen()
+                }
             }
         }
     }
